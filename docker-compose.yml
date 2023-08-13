@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  redis:
+    image: imanilchaudhari/docker-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - './docker/redis.conf:/usr/local/etc/redis/redis.conf'
