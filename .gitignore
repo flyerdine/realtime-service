@@ -1,10 +1,7 @@
 # compiled output
 /dist
 /node_modules
-/server-pub/node_modules
-/server-sub/node_modules
-/server-pub/package-lock.json
-/server-sub/package-lock.json
+/package-lock.json
 # Logs
 logs
 *.log
