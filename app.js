@@ -1,17 +1,16 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 require("dotenv").config();
 
-const serverHost = process.env.HOSTNAME || "localhost"
+const serverHost = process.env.HOST || "localhost"
 const serverPort = process.env.PORT || 3000;
-
-let routes = require("./src/routes/index");
+const routes = require("./src/routes/index");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
 
-
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use("/", routes);
 app.use(function (req, res) {
   res.status(404).send({
@@ -21,7 +20,7 @@ app.use(function (req, res) {
 
 app.listen(serverPort);
 
-console.log(`RESTful API server started on port ${serverPort}`);
+console.log(`Event service started on port ${serverPort}`);
 console.log(`Listening for traffic @ http://${serverHost}:${serverPort}`);
 
 module.exports = app;
