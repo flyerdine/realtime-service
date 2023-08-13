@@ -2,22 +2,20 @@ const redis = require('redis');
 const nameChannel = "orders";
 
 let OrderController = {};
-
-const orderStorage = [];
-
-const subClient = redis.createClient({ url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}` });
-subClient.on('error', err => console.log('Redis Client Error', err));
-
-subClient.subscribe(nameChannel, (order) => {
-    console.log("Capturing an Event using Redis to: " + order);
-    orderStorage.push(JSON.parse(order));
-});
-
-subClient.connect().then(() => {
-    console.log("Redis connected")
-});
+let orderStorage = [];
 
 OrderController.index = (req, res) => {
+    const subClient = redis.createClient({ url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}` });
+    subClient.on('error', err => console.log('Redis Client Error', err));
+
+    subClient.subscribe(nameChannel, (order) => {
+        console.log("Capturing an Event using Redis to: " + order);
+        orderStorage.push(JSON.parse(order));
+    });
+
+    subClient.connect().then(() => {
+        console.log("Redis connected")
+    });
     try {
         return res.json({ orders: orderStorage });
     } catch (error) {
@@ -28,7 +26,7 @@ OrderController.index = (req, res) => {
 };
 
 OrderController.create = (req, res) => {
-    const pubClient = redis.createClient({  url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`  });
+    const pubClient = redis.createClient({ url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}` });
     pubClient.on('error', err => console.log('Redis Client Error', err));
 
     pubClient.connect().then(() => {
