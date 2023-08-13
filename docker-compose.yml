@@ -1,9 +1,17 @@
-version: "3.7"
-
+version: '3'
 services:
-  redis:
+  webapp:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - './:/usr/src/app/'
+    links:
+      - redisdb
+  redisdb:
     image: imanilchaudhari/docker-redis
     ports:
-      - "6379:6379"
+      - '6379:6379'
     volumes:
       - './docker/redis.conf:/usr/local/etc/redis/redis.conf'

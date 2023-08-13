@@ -1,14 +1,14 @@
 {
   "name": "event-service",
   "version": "1.0.0",
-  "description": "",
+  "description": "Event dispatcher service built on NodeJS.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "keywords": [],
-  "author": "Diego Cortes",
+  "keywords": ["nodejs", "express"],
+  "author": "Aashish Chaudhary",
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^2.0.22",
@@ -19,7 +19,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "redis": "^4.6.7",
-    "uuid": "^9.0.0"
+    "redis": "^4.6.7"
   }
 }
