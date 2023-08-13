@@ -28,7 +28,7 @@ OrderController.index = (req, res) => {
 };
 
 OrderController.create = (req, res) => {
-    const pubClient = redis.createClient({ url: "redis://localhost:6379" });
+    const pubClient = redis.createClient({  url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`  });
     pubClient.on('error', err => console.log('Redis Client Error', err));
 
     pubClient.connect().then(() => {
