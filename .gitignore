@@ -1,7 +1,5 @@
-# compiled output
-/dist
+# node modules
 /node_modules
-/package-lock.json
 # Logs
 logs
 *.log
