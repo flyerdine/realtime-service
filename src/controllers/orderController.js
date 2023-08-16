@@ -5,7 +5,7 @@ let OrderController = {};
 let orderStorage = [];
 
 OrderController.index = (req, res) => {
-    const subClient = redis.createClient({ url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}` });
+    const subClient = redis.createClient({ url: process.env.REDIS_URL });
     subClient.on('error', err => console.log('Redis Client Error', err));
 
     subClient.subscribe(nameChannel, (order) => {
@@ -26,7 +26,7 @@ OrderController.index = (req, res) => {
 };
 
 OrderController.create = (req, res) => {
-    const pubClient = redis.createClient({ url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}` });
+    const pubClient = redis.createClient({ url: process.env.REDIS_URL });
     pubClient.on('error', err => console.log('Redis Client Error', err));
 
     pubClient.connect().then(() => {
