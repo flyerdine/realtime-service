@@ -1,4 +1,4 @@
-# Event service built with ExpressJS
+# Real time service built with ExpressJS
 
 Event dispatcher service built on NodeJS.
 
