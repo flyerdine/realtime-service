@@ -10,6 +10,9 @@ router.get("/", function (req, res, next) {
 /** Order Routes */
 router.use('/orders', require("./order"));
 
+/** Driver Routes */
+router.use('/driver', require("./driver"));
+
 /** Test Route */
 router.get("/test", function (req, res, next) {
     res.json({ result: "Test success!" });
