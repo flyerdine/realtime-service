@@ -26,7 +26,7 @@ router.get('/:driver_id', async function (req, res) {
     await subClient.subscribe(driver_id, (message, chanel) => {
         messageId++;
         res.write(`id: ${messageId}\r\n`);
-        res.write(`event: orders\r\n`);
+        res.write(`event: ${driver_id}\r\n`);
         res.write("data: " + message + "\r\n\n");
     });
 });
