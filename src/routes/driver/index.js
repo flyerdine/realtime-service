@@ -42,13 +42,13 @@ router.post('/:driver_id', async function (req, res) {
     });
     try {
         pubClient.publish(driver_id, JSON.stringify(req.body));
-        console.log(`Publishing an Event using Redis to :${req.body.order}`);
+        console.log(`Publishing an Event using Redis to :${req.body}`);
         return res.json({
             detail: 'Publishing an Event using Redis successful',
         });
     } catch (error) {
         return res.status(500).json({
-            detail: error.order
+            detail: error
         });
     }
 });
