@@ -1,6 +1,6 @@
 # Real time service built with ExpressJS
 
-Event dispatcher service built on NodeJS.
+Realtime service built on NodeJS.
 
 ## Tech Stack
 

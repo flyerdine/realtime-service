@@ -4,7 +4,7 @@ const router = express.Router();
 
 /** GET home page. */
 router.get("/", function (req, res, next) {
-    res.json({ message: "Welcome to the Event Service" });
+    res.json({ message: "Welcome to the Realtime Service" });
 });
 
 /** Order Routes */

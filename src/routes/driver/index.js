@@ -38,13 +38,13 @@ router.post('/:driver_id', async function (req, res) {
     pubClient.on('error', err => console.log('Redis Client Error', err));
 
     pubClient.connect().then(() => {
-        console.log("Redis connected")
+        console.log("Redis connected from driver latlng.")
     });
     try {
         pubClient.publish(driver_id, JSON.stringify(req.body));
-        console.log(`Publishing an Event using Redis to :${req.body}`);
+        console.log(`Publishing an driver latlng on ${driver_id} qith :${req.body}`);
         return res.json({
-            detail: 'Publishing an Event using Redis successful',
+            detail: `Publishing an driver latlng on ${driver_id} successful`,
         });
     } catch (error) {
         return res.status(500).json({

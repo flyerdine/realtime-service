@@ -10,7 +10,7 @@ router.get('/', async function (req, res) {
     subClient.on('error', err => console.log('Redis Client Error', err));
 
     await subClient.connect().then(() => {
-        console.log("Redis connected")
+        console.log(`Redis connected`)
     });
 
     res.writeHead(200, {
@@ -25,7 +25,7 @@ router.get('/', async function (req, res) {
         messageId++;
         res.write(`id: ${messageId}\r\n`);
         res.write(`event: orders\r\n`);
-        res.write("data: " + message + "\r\n\n");
+        res.write(`data: ` + message + `\r\n\n`);
         // res.end();
     });
 
@@ -33,7 +33,7 @@ router.get('/', async function (req, res) {
         messageId++;
         res.write(`id: ${messageId}\r\n`);
         res.write(`event: orders-nepalgunj\r\n`);
-        res.write("data: " + message + "\r\n\n");
+        res.write(`data: ` + message + `\r\n\n`);
         // res.end();
     });
 });
@@ -44,7 +44,7 @@ router.get('/:city', async function (req, res) {
     subClient.on('error', err => console.log('Redis Client Error', err));
 
     await subClient.connect().then(() => {
-        console.log("Redis connected")
+        console.log(`Redis connected`)
     });
 
     res.writeHead(200, {
@@ -59,7 +59,7 @@ router.get('/:city', async function (req, res) {
         messageId++;
         res.write(`id: ${messageId}\r\n`);
         res.write(`event: orders-${city}\r\n`);
-        res.write("data: " + message + "\r\n\n");
+        res.write(`data: ` + message + `\r\n\n`);
     });
 });
 
@@ -68,13 +68,13 @@ router.post('/', async function (req, res) {
     pubClient.on('error', err => console.log('Redis Client Error', err));
 
     pubClient.connect().then(() => {
-        console.log("Redis connected")
+        console.log(`Redis connected from orders.`)
     });
     try {
         pubClient.publish(`orders`, JSON.stringify(req.body));
-        console.log(`Publishing an Event using Redis to :${req.body}`);
+        console.log(`Publishing an order on orders with :${req.body}`);
         return res.json({
-            detail: 'Publishing an Event using Redis successful',
+            detail: 'Publishing an order on orders successful',
         });
     } catch (error) {
         return res.status(500).json({
@@ -89,13 +89,13 @@ router.post('/:city', async function (req, res) {
     pubClient.on('error', err => console.log('Redis Client Error', err));
 
     pubClient.connect().then(() => {
-        console.log("Redis connected")
+        console.log(`Redis connected from orders-${city}.`)
     });
     try {
         pubClient.publish(`orders-${city}`, JSON.stringify(req.body));
-        console.log(`Publishing an Event using Redis to :${req.body}`);
+        console.log(`Publishing an order on orders-${city} with :${req.body}`);
         return res.json({
-            detail: 'Publishing an Event using Redis successful',
+            detail: `Publishing an order on orders-${city} successful`,
         });
     } catch (error) {
         return res.status(500).json({
