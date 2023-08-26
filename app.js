@@ -3,12 +3,10 @@ const bodyParser = require('body-parser');
 const app = express();
 require("dotenv").config();
 
-const connectDB = require("./config/database");
 const serverHost = process.env.HOST || "localhost"
 const serverPort = process.env.PORT || 3000;
 const routes = require("./src/routes/index");
 
-connectDB();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
 
