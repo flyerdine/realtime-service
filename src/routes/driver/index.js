@@ -8,7 +8,10 @@ var messageId = 0;
 router.get('/:driver_id', async function (req, res) {
     var driver_id = req.params.driver_id;
 
-    const subClient = redis.createClient({ url: process.env.REDIS_URL });
+    const subClient = redis.createClient({
+        url: process.env.REDIS_URL,
+        password: process.env.REDIS_PASSWORD,
+    });
     subClient.on('error', err => console.log('Redis Client Error', err));
 
     await subClient.connect().then(() => {
@@ -34,7 +37,10 @@ router.get('/:driver_id', async function (req, res) {
 router.post('/:driver_id', async function (req, res) {
     var driver_id = req.params.driver_id;
 
-    const pubClient = redis.createClient({ url: process.env.REDIS_URL });
+    const pubClient = redis.createClient({
+        url: process.env.REDIS_URL,
+        password: process.env.REDIS_PASSWORD,
+    });
     pubClient.on('error', err => console.log('Redis Client Error', err));
 
     pubClient.connect().then(() => {

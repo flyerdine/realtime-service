@@ -6,7 +6,10 @@ const redis = require('redis');
 var messageId = 0;
 
 router.get('/', async function (req, res) {
-    const subClient = redis.createClient({ url: process.env.REDIS_URL });
+    const subClient = redis.createClient({
+        url: process.env.REDIS_URL,
+        password: process.env.REDIS_PASSWORD,
+    });
     subClient.on('error', err => console.log('Redis Client Error', err));
 
     await subClient.connect().then(() => {
@@ -40,7 +43,10 @@ router.get('/', async function (req, res) {
 
 router.get('/:city', async function (req, res) {
     var city = req.params.city;
-    const subClient = redis.createClient({ url: process.env.REDIS_URL });
+    const subClient = redis.createClient({
+        url: process.env.REDIS_URL,
+        password: process.env.REDIS_PASSWORD,
+    });
     subClient.on('error', err => console.log('Redis Client Error', err));
 
     await subClient.connect().then(() => {
@@ -64,7 +70,10 @@ router.get('/:city', async function (req, res) {
 });
 
 router.post('/', async function (req, res) {
-    const pubClient = redis.createClient({ url: process.env.REDIS_URL });
+    const pubClient = redis.createClient({
+        url: process.env.REDIS_URL,
+        password: process.env.REDIS_PASSWORD,
+    });
     pubClient.on('error', err => console.log('Redis Client Error', err));
 
     pubClient.connect().then(() => {
@@ -85,7 +94,10 @@ router.post('/', async function (req, res) {
 
 router.post('/:city', async function (req, res) {
     var city = req.params.city;
-    const pubClient = redis.createClient({ url: process.env.REDIS_URL });
+    const pubClient = redis.createClient({
+        url: process.env.REDIS_URL,
+        password: process.env.REDIS_PASSWORD,
+    });
     pubClient.on('error', err => console.log('Redis Client Error', err));
 
     pubClient.connect().then(() => {
