@@ -5,6 +5,9 @@ const redis = require('redis');
 
 var messageId = 0;
 
+/**
+ * @deprecated
+ */
 router.get('/', async function (req, res) {
     const subClient = redis.createClient({
         url: process.env.REDIS_URL,
@@ -55,6 +58,9 @@ router.post('/', async function (req, res) {
     }
 });
 
+/**
+ * @deprecated
+ */
 router.get('/:driver_id', async function (req, res) {
     var driver_id = req.params.driver_id;
 
@@ -84,6 +90,9 @@ router.get('/:driver_id', async function (req, res) {
     });
 });
 
+/**
+ * @deprecated
+ */
 router.post('/:driver_id', async function (req, res) {
     var driver_id = req.params.driver_id;
 
