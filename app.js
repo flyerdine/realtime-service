@@ -21,6 +21,6 @@ app.use(function (req, res) {
 app.listen(serverPort);
 
 console.log(`Realtime service started on port ${serverPort}`);
-console.log(`Listening for traffic @ http://${serverHost}:${serverPort}`);
+console.log(`Listening for traffic @ ${serverHost}:${serverPort}`);
 
 module.exports = app;

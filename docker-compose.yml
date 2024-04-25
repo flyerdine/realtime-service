@@ -1,30 +1,14 @@
 version: '3'
 services:
   webapp:
-    build:
-      dockerfile: Dockerfile
+    build: .
     ports:
-      - '3000:3000'
+      - '${APP_PORT}:3000'
     volumes:
       - './:/usr/src/app/'
     links:
       - redisdb
   redisdb:
-    image: imanilchaudhari/docker-redis
+    image: redis:4.0-alpine
     ports:
-      - '6379:6379'
-    volumes:
-      - './docker/redis.conf:/usr/local/etc/redis/redis.conf'
-  mariadb:
-    image: 'mariadb:10.3.28'
-    restart: 'no'
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: 'database'
-  adminer:
-    image: adminer
-    restart: 'no'
-    links:
-      - mariadb
-    ports:
-      - '3030:8080'
+      - '${REDIS_PORT}:6379'

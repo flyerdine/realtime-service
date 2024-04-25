@@ -1,0 +1,9 @@
+[
+  {
+    "script": "app.js",
+    "name": "realtime-service",
+    "exec_mode": "cluster",
+    "instances": 2,
+    "max_memory_restart": "100M"
+  }
+]

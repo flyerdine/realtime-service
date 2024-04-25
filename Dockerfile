@@ -8,6 +8,8 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
+RUN npm install -g pm2
+
 RUN echo "Installing Node modules..."
 RUN npm install --only=production
 
@@ -16,4 +18,5 @@ COPY . .
 
 RUN echo "Starting service at on port 3000.."
 EXPOSE 3000
-ENTRYPOINT ["npm", "start"]
+
+ENTRYPOINT ["pm2-runtime", "process.json"]
