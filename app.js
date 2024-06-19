@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
 
 app.use(bodyParser.json());
+app.use(express.static('public'))
 app.use("/", routes);
 app.use(function (req, res) {
   res.status(404).send({
@@ -18,9 +19,10 @@ app.use(function (req, res) {
   });
 });
 
-app.listen(serverPort);
-
-console.log(`Realtime service started on port ${serverPort}`);
-console.log(`Listening for traffic @ ${serverHost}:${serverPort}`);
+app.listen(serverPort, () => {
+  console.log(`Listening for traffic @ ${serverHost}:${serverPort}`);
+}).on('error', function(error) {
+  console.log(error.message);
+});
 
 module.exports = app;
